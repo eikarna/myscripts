@@ -22,6 +22,9 @@
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225.git -b spes-r-oss kernel && cd kernel
+export LOCALVERSION=1/Dewi🍃✨
+export KBUILD_BUILD_USER=Asyanx
+export KBUILD_BUILD_HOST=#FunProject
 
 # Bail out if script fails
 set -e
@@ -51,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-fog"
+ZIPNAME="sea-dewi"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -174,7 +177,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "clang" ]
 	then
 		msger -n "|| Cloning Clang-14||"
-		git clone --depth=1 https://github.com/greenforce-project/clang-llvm -b release/14.0 clang-llvm
+		git clone --depth=1 https://gitlab.com/z3zens/neutron-clang -b main clang-llvm
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LD_LIBRARY_PATH=$TC_DIR/bin/:$LD_LIBRARY_PATH
@@ -274,7 +277,15 @@ build_kernel()
 		MAKE+=(
 			CROSS_COMPILE=aarch64-linux-gnu- \
 			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-			CC=clang 
+   			CROSS_COMPILE_COMPAT=arm-linux-gnueabi- \
+			CC=clang \
+			AR=llvm-ar \
+			OBJDUMP=llvm-objdump \
+			STRIP=llvm-strip \
+			NM=llvm-nm \
+			OBJCOPY=llvm-objcopy \
+   			LD_LIBRARY_PATH=$TC_DIR/lib \
+			LD="$LINKER"
 		)
 	elif [ $COMPILER = "gcc" ]
 	then
