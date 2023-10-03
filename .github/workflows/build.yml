@@ -4,14 +4,15 @@ on: [push]
 
 jobs:
   kernel-build:
-    runs-on: buildjet-64vcpu-ubuntu-2204
+    runs-on: ubuntu-latest
     container:
-      image: panchajanya1999/archlinux:latest
+      image: fedora:rawhide
     steps:
     - uses: actions/checkout@v2
     - name: Setup CI
       run: |
-        sudo ln -s /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && date
-        sudo pacman -Sy --noconfirm git bc inetutils python3 flex bison libc++ libxml2 python-pipx zip wget cpio jdk-openjdk tzdata
+            dnf group install development-tools -y
+            dnf install llvm lld bc bison ca-certificates curl flex glibc-devel.i686 glibc-devel binutils-devel openssl python3 python2 zstd clang gcc-arm-linux-gnu dtc libxml2 libarchive openssl-devel tomsfastmath-devel wget xz -y
+            ln -sf "/usr/bin/python3" /usr/bin/python
     - name: Build Kernel
       run: bash kernel.sh
