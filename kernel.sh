@@ -21,7 +21,7 @@
 # Kernel building script
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225 -b spes-r-oss kernel && cd kernel
+git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225.git -b spes-r-oss kernel && cd kernel
 
 # Bail out if script fails
 set -e
@@ -181,7 +181,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	fi
 
 	msger -n "|| Cloning Anykernel ||"
-	git clone --depth 1 --no-single-branch https://github.com/nerdprojectorg/AnyKernel3.git
+	git clone --depth 1 --no-single-branch https://github.com/Kentanglu/AnyKernel3-680.git
 
 	if [ $BUILD_DTBO = 1 ]
 	then
