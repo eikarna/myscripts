@@ -21,8 +21,7 @@
 # Kernel building script
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/asus-X01BD-4-19-devs/android_kernel_asus_sdm660 -b android13-sdm660 kernel && cd kernel
-git revert 0461bae09bcf09c58c12de9772cd3247add4ee33 -n
+git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225 -b spes-r-oss kernel && cd kernel
 
 # Bail out if script fails
 set -e
@@ -52,24 +51,24 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="android13-sdm660"
+ZIPNAME="sea-kernel"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="z3zens"
+AUTHOR="Asyanx"
 
 # Architecture
 ARCH=arm64
 
 # The name of the device for which the kernel is built
-MODEL="Zenfone Max Pro M2"
+MODEL="Redmi 10C"
 
 # The codename of the device
-DEVICE="X01BD"
+DEVICE="fog"
 
 # The defconfig which should be used. Get it from config.gz from
 # your device or check source
-DEFCONFIG=asus/X01BD_defconfig
+DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler. 
 # 'clang' or 'gcc'
@@ -90,20 +89,20 @@ PTTG=1
 if [ $PTTG = 1 ]
 then
 	# Set Telegram Chat ID
-	CHATID="-1001567354257"
-	TOKEN="5654193670:AAGgu2DWx7tQjGq9tn-uaPIoljdrYWGBWio"
+	CHATID="-1001910249307"
+	TOKEN="5501360993:AAFLnvOrkUpsFJktYu-snmimKNoGk7_WVw8"
 fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
 DEF_REG=0
 
 # Files/artifacts
-FILES=Image.gz-dtb
+FILES=Image.gz
 
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
 BUILD_DTBO=0
-if [ $BUILD_DTBO = 1 ]
+if [ $BUILD_DTBO = n ]
 then 
 	# Set this to your dtbo path. 
 	# Defaults in folder out/arch/arm64/boot/dts
