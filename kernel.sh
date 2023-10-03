@@ -51,7 +51,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-kernel"
+ZIPNAME="sea-fog"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -274,14 +274,7 @@ build_kernel()
 		MAKE+=(
 			CROSS_COMPILE=aarch64-linux-gnu- \
 			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-			CC=clang \
-			AR=llvm-ar \
-			OBJDUMP=llvm-objdump \
-			STRIP=llvm-strip \
-			NM=llvm-nm \
-			OBJCOPY=llvm-objcopy \
-   			LD_LIBRARY_PATH=$TC_DIR/lib \
-			LD="$LINKER"
+			CC=clang 
 		)
 	elif [ $COMPILER = "gcc" ]
 	then
