@@ -173,7 +173,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	
 	if [ $COMPILER = "clang" ]
 	then
-		msger -n "|| Cloning Clang-17||"
+		msger -n "|| Cloning Clang-14||"
 		git clone --depth=1 https://github.com/greenforce-project/clang-llvm -b release/14.0 clang-llvm
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
@@ -181,7 +181,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	fi
 
 	msger -n "|| Cloning Anykernel ||"
-	git clone --depth 1 --no-single-branch https://github.com/Kentanglu/AnyKernel3-680.git
+	git clone --depth 1 https://github.com/Kentanglu/AnyKernel3-680 -b master
 
 	if [ $BUILD_DTBO = 1 ]
 	then
