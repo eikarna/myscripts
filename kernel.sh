@@ -174,7 +174,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "clang" ]
 	then
 		msger -n "|| Cloning Clang-17||"
-		git clone --depth=1 https://gitlab.com/z3zens/neutron-clang -b main clang-llvm
+		git clone --depth=1 https://github.com/greenforce-project/clang-llvm -b release/14.0 clang-llvm
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LD_LIBRARY_PATH=$TC_DIR/bin/:$LD_LIBRARY_PATH
