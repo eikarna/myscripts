@@ -278,20 +278,7 @@ build_kernel()
 			CROSS_COMPILE=aarch64-linux-gnu- \
    			CROSS_COMPILE_ARM32=arm-linux-androideabi- \
         		CC=clang \
-       			AR=llvm-ar \
-   			AS=llvm-as \
-      			NM=llvm-nm \		
-   			LD=aarch64-linux-android-ld \
-   			STRIP=aarch64-linux-android-strip \
-   			OBJCOPY=llvm-objcopy \
-   			OBJDUMP=llvm-objdump \
-   			OBJSIZE=llvm-size \
-   			READELF=aarch64-linux-android-readelf \
-   			HOSTCC=clang \
-   			HOSTCXX=clang++ \
-   			HOSTAR=llvm-ar \
-			CLANG_TRIPLE=aarch64-linux-gnu- \
-      			STRIP=llvm-strip
+			CLANG_TRIPLE=aarch64-linux-gnu-
 		)
 	elif [ $COMPILER = "gcc" ]
 	then
