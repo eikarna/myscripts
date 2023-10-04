@@ -21,7 +21,7 @@
 # Kernel building script
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225.git -b spes-r-oss kernel && cd kernel
+git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss kernel && cd kernel
 export LOCALVERSION=1/Dewi🍃✨
 
 # Bail out if script fails
@@ -275,7 +275,6 @@ build_kernel()
 		MAKE+=(
 			CROSS_COMPILE=aarch64-linux-gnu- \
 			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-   			CROSS_COMPILE_COMPAT=arm-linux-gnueabi- \
 			CC=clang \
 			AR=llvm-ar \
 			OBJDUMP=llvm-objdump \
