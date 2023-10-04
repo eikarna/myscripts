@@ -23,8 +23,6 @@
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225.git -b spes-r-oss kernel && cd kernel
 export LOCALVERSION=1/Dewi🍃✨
-export KBUILD_BUILD_USER=Asyanx
-export KBUILD_BUILD_HOST=#FunProject
 
 # Bail out if script fails
 set -e
@@ -54,7 +52,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-dewi"
+ZIPNAME="sea-dewi-t1"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
