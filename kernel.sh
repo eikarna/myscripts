@@ -174,8 +174,10 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	
 	if [ $COMPILER = "clang" ]
 	then
-		msger -n "|| Cloning Clang-14||"
-		git clone --depth=1 https://gitlab.com/z3zens/neutron-clang -b main clang-llvm
+		msger -n "|| Cloning Clang||"
+		wget https://github.com/kdrag0n/proton-clang/archive/refs/heads/master.zip -q
+     		unzip master.zip
+     		mv proton-clang-master clang-llvm
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LD_LIBRARY_PATH=$TC_DIR/bin/:$LD_LIBRARY_PATH
@@ -274,15 +276,22 @@ build_kernel()
 	then
 		MAKE+=(
 			CROSS_COMPILE=aarch64-linux-gnu- \
-			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-			CC=clang \
-			AR=llvm-ar \
-			OBJDUMP=llvm-objdump \
-			STRIP=llvm-strip \
-			NM=llvm-nm \
-			OBJCOPY=llvm-objcopy \
-   			LD_LIBRARY_PATH=$TC_DIR/lib \
-			LD="$LINKER"
+   			CROSS_COMPILE_ARM32=arm-linux-androideabi- \
+        		CC=clang \
+       			AR=llvm-ar \
+   			AS=llvm-as \
+      			NM=llvm-nm \		
+   			LD=aarch64-linux-android-ld \
+   			STRIP=aarch64-linux-android-strip \
+   			OBJCOPY=llvm-objcopy \
+   			OBJDUMP=llvm-objdump \
+   			OBJSIZE=llvm-size \
+   			READELF=aarch64-linux-android-readelf \
+   			HOSTCC=clang \
+   			HOSTCXX=clang++ \
+   			HOSTAR=llvm-ar \
+			CLANG_TRIPLE=aarch64-linux-gnu- \
+      			STRIP=llvm-strip
 		)
 	elif [ $COMPILER = "gcc" ]
 	then
