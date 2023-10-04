@@ -21,7 +21,7 @@
 # Kernel building script
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225.git -b spes-r-oss kernel && cd kernel
+git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss kernel && cd kernel
 export LOCALVERSION=1/Dewi🍃✨
 
 # Bail out if script fails
