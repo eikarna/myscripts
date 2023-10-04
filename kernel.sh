@@ -21,7 +21,7 @@
 # Kernel building script
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss kernel && cd kernel
+git clone --single-branch --depth=1 https://github.com/Kentanglu/sea_kernel-sm6225.git -b spes-r-oss kernel && cd kernel
 export LOCALVERSION=1/Dewi🍃✨
 
 # Bail out if script fails
@@ -52,7 +52,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-dewi-t2"
+ZIPNAME="sea-dewi-t1"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -174,10 +174,8 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	
 	if [ $COMPILER = "clang" ]
 	then
-		msger -n "|| Cloning Clang||"
-		wget https://github.com/kdrag0n/proton-clang/archive/refs/heads/master.zip -q
-     		unzip master.zip
-     		mv proton-clang-master clang-llvm
+		msger -n "|| Cloning Clang-14||"
+		git clone --depth=1 https://gitlab.com/z3zens/neutron-clang -b main clang-llvm
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LD_LIBRARY_PATH=$TC_DIR/bin/:$LD_LIBRARY_PATH
@@ -276,9 +274,16 @@ build_kernel()
 	then
 		MAKE+=(
 			CROSS_COMPILE=aarch64-linux-gnu- \
-   			CROSS_COMPILE_ARM32=arm-linux-androideabi- \
-        		CC=clang \
-			CLANG_TRIPLE=aarch64-linux-gnu-
+			CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+   			CLANG_TRIPLE=aarch64-linux-gnu- \
+			CC=clang \
+			AR=llvm-ar \
+			OBJDUMP=llvm-objdump \
+			STRIP=llvm-strip \
+			NM=llvm-nm \
+			OBJCOPY=llvm-objcopy \
+   			LD_LIBRARY_PATH=$TC_DIR/lib \
+			LD="$LINKER"
 		)
 	elif [ $COMPILER = "gcc" ]
 	then
