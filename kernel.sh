@@ -176,8 +176,8 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	then
 		msger -n "|| Cloning Clang||"
                 mkdir clang-llvm
-		wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/ndk-r23-beta2/clang-r412851.tar.gz -O "Clang-18.0.0-20230813.tar.gz"
-                tar -xf Clang-18.0.0-20230813.tar.gz -C clang-llvm
+		wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/ndk-r23-beta2/clang-r412851.tar.gz -O "clang-r412851.tar.gz"
+                tar -xf clang-r412851.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 $GCCaPath --depth=1
                 git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 $GCCbPath --depth=1
                 for64=aarch64-linux-android
