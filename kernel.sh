@@ -52,7 +52,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-dewi-T5s"
+ZIPNAME="sea-dewi-T6ups"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -176,14 +176,14 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	then
 		msger -n "|| Cloning Clang||"
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20230813-release/Clang-18.0.0-20230813.tar.gz -O "Clang-18.0.0-20230813.tar.gz"
+		wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/ndk-r23-beta2/clang-r412851.tar.gz -O "Clang-18.0.0-20230813.tar.gz"
                 tar -xf Clang-18.0.0-20230813.tar.gz -C clang-llvm
-		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
-                git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
+		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 $GCCaPath --depth=1
+                git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 $GCCbPath --depth=1
+                for64=aarch64-linux-android
+                for32=arm-linux-androideabi
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
-                for64=aarch64-zyc-linux-gnu
-                for32=arm-zyc-linux-gnueabi
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LD_LIBRARY_PATH=$TC_DIR/bin/:$GCC64_DIR/bin/:$GCC32_DIR/bin/:$LD_LIBRARY_PATH
@@ -281,13 +281,23 @@ build_kernel()
 	if [ $COMPILER = "clang" ]
 	then
 		MAKE+=(
-			CROSS_COMPILE=$for64- \
-			CROSS_COMPILE_ARM32=$for32- \
-   			CLANG_TRIPLE=aarch64-linux-gnu- \
+			CROSS_COMPILE=aarch64-linux-android- \
+			CROSS_COMPILE_ARM32=arm-linux-androideabi- \
 			CC=clang \
-   			LD_LIBRARY_PATH=$TC_DIR/lib:$GCC64_DIR/lib:$GCC32_DIR/lib:${LD_LIBRARY_PATH} \
-			LD=$for64-ld LDGOLD=$for64-ld.gold HOSTLD=$TC_DIR/bin/ld \
-                        LD_COMPAT=$GCC64_DIR/bin/$for32-ld
+                        AR=llvm-ar \
+                        AS=llvm-as \
+                        NM=llvm-nm \
+                        LD=aarch64-linux-android-ld \
+                        STRIP=aarch64-linux-android-strip \
+                        OBJCOPY=llvm-objcopy \
+                        OBJDUMP=llvm-objdump \
+                        OBJSIZE=llvm-size \
+                        READELF=aarch64-linux-android-readelf \
+                        HOSTCC=clang \
+                        HOSTCXX=clang++ \
+                        HOSTAR=llvm-ar \
+   			CLANG_TRIPLE=aarch64-linux-gnu- \
+			STRIP=llvm-strip
 		)
 	elif [ $COMPILER = "gcc" ]
 	then
