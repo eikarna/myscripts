@@ -178,8 +178,8 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
                 mkdir clang-llvm
 		wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/tags/ndk-r23-beta2/clang-r412851.tar.gz -O "clang-r412851.tar.gz"
                 tar -xf clang-r412851.tar.gz -C clang-llvm
-		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 $GCCaPath --depth=1
-                git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 $GCCbPath --depth=1
+		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 gcc64 --depth=1
+                git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 gcc32 --depth=1
                 for64=aarch64-linux-android
                 for32=arm-linux-androideabi
 		GCC64_DIR=$KERNEL_DIR/gcc64
