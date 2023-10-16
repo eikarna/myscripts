@@ -19,11 +19,8 @@
  #
 
 # Kernel building script
-
-# The defult directory where the kernel should be placed
-KERNEL_DIR="$(pwd)"
-KERNEL="$KERNEL_DIR/kernel"
-BASEDIR="$(basename "$KERNEL_DIR")"
+WORKDIR="$(pwd)"
+KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=4 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
@@ -52,6 +49,10 @@ cdir()
 
 ##------------------------------------------------------##
 ##----------Basic Informations, COMPULSORY--------------##
+
+# The defult directory where the kernel should be placed
+KERNEL_DIR="$(pwd)"
+BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
 ZIPNAME="sea-dewi-T10KSU"
