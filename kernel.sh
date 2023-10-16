@@ -21,7 +21,7 @@
 # Kernel building script
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
+git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss kernel && cd kernel
 export LOCALVERSION=1/Dewi-KSU✨
 
 # Bail out if script fails
@@ -49,7 +49,6 @@ cdir()
 
 # The defult directory where the kernel should be placed
 KERNEL_DIR="$(pwd)"
-KERNEL="$KERNEL_DIR/kernel"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
@@ -122,7 +121,7 @@ fi
 
 if [ $KSU = 1 ]
 then
-for patch_file in $KERNEL_DIR/patchs/KernelSU.patch
+for patch_file in $KERNEL_DIR/patchs/*.patch
 	do
 	patch -p1 < "$patch_file"
 done
