@@ -21,10 +21,8 @@
 # Kernel building script
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss kernel && cd kernel
-curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
-KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
-KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
+git clone --single-branch --depth=4 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
+git reset --hard HEAD^3
 export LOCALVERSION=1/Dewi-KSU✨
 
 # Bail out if script fails
@@ -52,6 +50,7 @@ cdir()
 
 # The defult directory where the kernel should be placed
 KERNEL_DIR="$(pwd)"
+KERNEL="$KERNEL_DIR/kernel"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
@@ -88,15 +87,6 @@ LINKER=ld.lld
 # Clean source prior building. 1 is NO(default) | 0 is YES
 INCREMENTAL=0
 
-# PATCH KERNELSU
-apply_patchs () {
-for patch_file in $KERNEL_DIR/patchs/*.patch
-	do
-	patch -p1 < "$patch_file"
-done
-}
-apply_patchs
-
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
 PTTG=1
 if [ $PTTG = 1 ]
@@ -120,6 +110,23 @@ then
 	# Set this to your dtbo path. 
 	# Defaults in folder out/arch/arm64/boot/dts
 	DTBO_PATH="asus/X01BD-sdm660-overlay.dtbo"
+fi
+
+# PATCH KERNELSU
+KSU=1
+if [ $KSU = 1 ]
+then
+curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
+KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
+fi
+
+if [ $KSU = 1 ]
+then
+for patch_file in $KERNEL_DIR/patchs/KernelSU.patch
+	do
+	patch -p1 < "$patch_file"
+done
 fi
 
 # Sign the zipfile
