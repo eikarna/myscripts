@@ -23,8 +23,7 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=4 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
-git reset --hard 7622659
+git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
 export LOCALVERSION=1/Dewi-KSU✨
 
 # Bail out if script fails
@@ -55,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-dewi-T10KSU"
+ZIPNAME="sea-dewi-T10-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -106,12 +105,6 @@ FILES=Image.gz
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
 BUILD_DTBO=0
-if [ $BUILD_DTBO = n ]
-then 
-	# Set this to your dtbo path. 
-	# Defaults in folder out/arch/arm64/boot/dts
-	DTBO_PATH="asus/X01BD-sdm660-overlay.dtbo"
-fi
 
 # PATCH KERNELSU
 KSU=1
