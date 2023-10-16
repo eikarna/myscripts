@@ -22,7 +22,10 @@
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss kernel && cd kernel
-export LOCALVERSION=1/Dewi✨
+curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
+KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
+export LOCALVERSION=1/Dewi-KSU✨
 
 # Bail out if script fails
 set -e
@@ -44,6 +47,14 @@ cdir()
 	cd "$1" 2>/dev/null || msger -e "The directory $1 doesn't exists !"
 }
 
+# PATCH KERNELSU
+apply_patchs () {
+for patch_file in $(pwd)/patchs/*.patch
+	do
+	patch -p1 < "$patch_file"
+done
+}
+
 ##------------------------------------------------------##
 ##----------Basic Informations, COMPULSORY--------------##
 
@@ -52,7 +63,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-dewi-T10"
+ZIPNAME="sea-dewi-T10KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -263,7 +274,7 @@ build_kernel()
 
 	if [ "$PTTG" = 1 ]
  	then
-		tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>Linker : </b><code>$LINKER</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>"
+		tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>KernelSU Version : </b><code>$$KERNELSU_VERSION</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>"
 	fi
 
 	make O=out $DEFCONFIG
