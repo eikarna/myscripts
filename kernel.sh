@@ -27,7 +27,7 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # Cloning Sources
 git clone --single-branch --depth=4 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
-git reset --hard HEAD^3
+git reset --hard 7622659
 export LOCALVERSION=1/Dewi-KSU✨
 
 # Bail out if script fails
