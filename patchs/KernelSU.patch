@@ -24,7 +24,7 @@ diff --git a/fs/exec.c b/fs/exec.c
 index ae0a49517..4a0d89480 100644
 --- a/fs/exec.c
 +++ b/fs/exec.c
-@@ -1720,6 +1720,11
+@@ -1699,6 +1709,11 @@ static int exec_binprm(struct linux_binprm *bprm)
  /*
   * sys_execve() executes a new program.
   */
