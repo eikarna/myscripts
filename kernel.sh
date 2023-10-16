@@ -117,6 +117,10 @@ then
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
+fi
+
+if [ $KSU = 1 ]
+then
 for patch_file in $KERNEL_DIR/patchs/*.patch
 	do
 	patch -p1 < "$patch_file"
