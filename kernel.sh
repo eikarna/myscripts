@@ -122,14 +122,6 @@ KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
 fi
 
-if [ $KSU = 1 ]
-then
-for patch_file in $KERNEL_DIR/patchs/KernelSU.patch
-	do
-	patch -p1 < "$patch_file"
-done
-fi
-
 # Sign the zipfile
 # 1 is YES | 0 is NO
 SIGN=0
@@ -295,6 +287,14 @@ build_kernel()
 
 						This is an auto-generated commit"
 	fi
+
+        if [ $KSU = 1 ]
+	then
+           for patch_file in $KERNEL_DIR/patchs/KernelSU.patch
+	do
+           patch -p1 < "$patch_file"
+        done
+        fi
 
 	BUILD_START=$(date +"%s")
 	
