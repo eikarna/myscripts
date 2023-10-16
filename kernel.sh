@@ -47,15 +47,6 @@ cdir()
 	cd "$1" 2>/dev/null || msger -e "The directory $1 doesn't exists !"
 }
 
-# PATCH KERNELSU
-apply_patchs () {
-for patch_file in $KERNEL_DIR/patchs/*.patch
-	do
-	patch -p1 < "$patch_file"
-done
-}
-apply_patchs
-
 ##------------------------------------------------------##
 ##----------Basic Informations, COMPULSORY--------------##
 
@@ -96,6 +87,15 @@ LINKER=ld.lld
 
 # Clean source prior building. 1 is NO(default) | 0 is YES
 INCREMENTAL=0
+
+# PATCH KERNELSU
+apply_patchs () {
+for patch_file in $KERNEL_DIR/patchs/*.patch
+	do
+	patch -p1 < "$patch_file"
+done
+}
+apply_patchs
 
 # Push ZIP to Telegram. 1 is YES | 0 is NO(default)
 PTTG=1
