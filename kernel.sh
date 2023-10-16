@@ -22,6 +22,9 @@
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss kernel && cd kernel
+curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
+KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
 export LOCALVERSION=1/Dewi-KSU✨
 
 # Bail out if script fails
@@ -43,6 +46,15 @@ cdir()
 {
 	cd "$1" 2>/dev/null || msger -e "The directory $1 doesn't exists !"
 }
+
+# PATCH KERNELSU
+apply_patchs () {
+for patch_file in $KERNEL_DIR/patchs/*.patch
+	do
+	patch -p1 < "$patch_file"
+done
+}
+apply_patchs
 
 ##------------------------------------------------------##
 ##----------Basic Informations, COMPULSORY--------------##
@@ -108,23 +120,6 @@ then
 	# Set this to your dtbo path. 
 	# Defaults in folder out/arch/arm64/boot/dts
 	DTBO_PATH="asus/X01BD-sdm660-overlay.dtbo"
-fi
-
-# PATCH KERNELSU
-KSU=1
-if [ $KSU = 1 ]
-then
-curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
-KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
-KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
-fi
-
-if [ $KSU = 1 ]
-then
-for patch_file in $KERNEL_DIR/patchs/*.patch
-	do
-	patch -p1 < "$patch_file"
-done
 fi
 
 # Sign the zipfile
