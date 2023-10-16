@@ -121,7 +121,7 @@ fi
 
 if [ $KSU = 1 ]
 then
-for patch_file in $KERNEL_DIR/patchs/*.patch
+for patch_file in $KERNEL_DIR/patchs/KernelSU.patch
 	do
 	patch -p1 < "$patch_file"
 done
