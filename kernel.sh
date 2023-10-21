@@ -23,7 +23,9 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
+git clone --single-branch --depth=10 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
+git reset --hard 9b44e12e2660489384e10f8c5fae9576eb5db2e1
+git cherry-pick 7b7ef490b3718bb4f4172f4ce327460477a98912^..fb8559aa1e953150b37af035888c327eb63dffcb
 export LOCALVERSION=1/WhoCare-KSU🦹✨
 
 # Bail out if script fails
