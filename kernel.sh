@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
-export LOCALVERSION=1/WhoCare-KSU🦸✨
+export LOCALVERSION=1/WhoCare-KSU🦹✨
 
 # Bail out if script fails
 set -e
@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-WhoCare-T4-KSU"
+ZIPNAME="sea-WhoCare-T4.1-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
