@@ -21,9 +21,10 @@
 # Kernel building script
 WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
+githubKey="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"
 
 # Cloning Sources
-git clone --single-branch --depth=10 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
+git clone --single-branch --depth=10 https://$githubKey@github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
 export LOCALVERSION=2/WhoCare-KSU🦹✨
 
 # Bail out if script fails
