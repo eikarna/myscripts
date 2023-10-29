@@ -23,7 +23,7 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=2 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
+git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
 export LOCALVERSION=2/WhoCare-KSU🦹✨
 
 # Bail out if script fails
@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-WhoCare-T4-KSU"
+ZIPNAME="sea-WhoCare-T5-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -180,8 +180,8 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20231025-release/Clang-18.0.0-20231025.tar.gz -O "Clang-18.0.0-20231025.tar.gz"
-                tar -xf Clang-18.0.0-20231025.tar.gz -C clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20231028-release/Clang-18.0.0-20231028.tar.gz -O "Clang-18.0.0-20231028.tar.gz"
+                tar -xf Clang-18.0.0-20231028.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
