@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T1-KSU"
+ZIPNAME="sea-Eirene-T2-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
