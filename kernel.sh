@@ -75,7 +75,7 @@ DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler. 
 # 'clang' or 'gcc'
-COMPILER=gcc
+COMPILER=clang
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
@@ -180,8 +180,8 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20230813-release/Clang-18.0.0-20230813.tar.gz -O "Clang-18.0.0-20230813.tar.gz"
-                tar -xf Clang-18.0.0-20230813.tar.gz -C clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20231113-release/Clang-18.0.0-20231113.tar.gz -O "Clang-18.0.0-20231113.tar.gz"
+                tar -xf Clang-18.0.0-20231113.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
