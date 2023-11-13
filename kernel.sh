@@ -75,7 +75,7 @@ DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler. 
 # 'clang' or 'gcc'
-COMPILER=clang
+COMPILER=gcc
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
@@ -172,7 +172,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	then
 		msger -n "|| Cloning GCC 9.3.0 baremetal ||"
 		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64
-		git clone --depth=1 https://github.com/arter97/arm32-gcc.git gcc32
+		git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
@@ -180,10 +180,10 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/18.0.0-20231113-release/Clang-18.0.0-20231113.tar.gz -O "Clang-18.0.0-20231113.tar.gz"
-                tar -xf Clang-18.0.0-20231113.tar.gz -C clang-llvm
-		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
-                git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
+		wget -q https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/3a785d33320c48b09f7d6fcf2a37fed702686fdc/clang-r437112.tar.gz -O "clang-r437112.tar.gz"
+                tar -xf clang-r437112.tar.gz -C clang-llvm
+		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 12 gcc64 --depth=1
+                git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 12 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
                 for64=aarch64-zyc-linux-gnu
