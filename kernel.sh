@@ -297,9 +297,8 @@ build_kernel()
 			CROSS_COMPILE=$for64- \
 			CROSS_COMPILE_ARM32=$for32- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
-			CC=clang 
-	)
- 
+			CC=clang LLVM_IAS=1
+	) 
 	elif [ $COMPILER = "gcc" ]
 	then
 		MAKE+=(
