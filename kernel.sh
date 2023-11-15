@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T3-KSU"
+ZIPNAME="sea-Eirene-T3-NONKSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -107,7 +107,7 @@ FILES=Image.gz
 BUILD_DTBO=0
 
 # PATCH KERNELSU
-KSU=1
+KSU=0
 if [ $KSU = 1 ]
 then
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
