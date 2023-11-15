@@ -75,7 +75,7 @@ DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler. 
 # 'clang' or 'gcc'
-COMPILER=gcc
+COMPILER=clang
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
@@ -171,14 +171,8 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "gcc" ]
 	then
 		msger -n "|| Cloning GCC 9.3.0 baremetal ||"
-		git clone --depth=50 https://github.com/arter97/arm64-gcc.git gcc64
-		cd gcc64 || exit
-		git reset --hard 811a3bc6b40ad924cd1a24a481b6ac5d9227ff7e
-		cd $KERNEL_DIR || exit
-		git clone --depth=50 https://github.com/arter97/arm32-gcc.git gcc32
-  		cd gcc32 || exit
-		git reset --hard 566df579fa8123a5357c4bdcbbe62a192c5b37b4
-		cd $KERNEL_DIR || exit
+		git clone --depth=1 https://github.com/arter97/arm64-gcc.git gcc64
+		git clone --depth=1 https://github.com/arter97/arm32-gcc.git gcc32
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
@@ -188,12 +182,12 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
                 mkdir clang-llvm
 		wget -q https://android.googlesource.com/platform//prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r450784e.tar.gz -O "clang-r450784e.tar.gz"
                 tar -xf clang-r450784e.tar.gz -C clang-llvm
-		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 gcc64 --depth=1
-                git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 gcc32 --depth=1
+		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git -b gcc-new gcc64
+		git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git -b gcc-new gcc32
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
-                for64=aarch64-linux-android
-                for32=arm-linux-androideabi
+                for64=aarch64-elf-
+                for32=arm-eabi-
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LD_LIBRARY_PATH=$TC_DIR/bin/:$GCC64_DIR/bin/:$GCC32_DIR/bin/:$LD_LIBRARY_PATH
