@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T3-KSU"
+ZIPNAME="sea-Eirene-T4-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -298,7 +298,7 @@ build_kernel()
 			CROSS_COMPILE_ARM32=$for32- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
 			CC=clang LLVM_IAS=1 \
-			LD=$for64-ld.gold LDGOLD=$for64-ld.gold HOSTLD=$TC_DIR/bin/ld \
+			LD=$for64-ld LDGOLD=$for64-ld.gold HOSTLD=$TC_DIR/bin/ld \
                         LD_COMPAT=$GCC64_DIR/bin/$for32-ld   
 	) 
 	elif [ $COMPILER = "gcc" ]
