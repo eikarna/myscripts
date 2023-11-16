@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T4-KSU"
+ZIPNAME="sea-Eirene-T3-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -171,8 +171,8 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "gcc" ]
 	then
 		msger -n "|| Cloning GCC 9.3.0 baremetal ||"
-		git clone --depth=1 https://github.com/arter97/arm64-gcc.git gcc64
-		git clone --depth=1 https://github.com/arter97/arm32-gcc.git gcc32
+		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64
+		git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
@@ -182,12 +182,12 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
                 mkdir clang-llvm
 		wget -q https://android.googlesource.com/platform//prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r450784e.tar.gz -O "clang-r450784e.tar.gz"
                 tar -xf clang-r450784e.tar.gz -C clang-llvm
-		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git -b gcc-new gcc64
-		git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git -b gcc-new gcc32
+		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 gcc64 --depth=1
+                git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
-                for64=aarch64-elf-
-                for32=arm-eabi-
+                for64=aarch64-linux-android
+                for32=arm-linux-androideabi
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LD_LIBRARY_PATH=$TC_DIR/bin/:$GCC64_DIR/bin/:$GCC32_DIR/bin/:$LD_LIBRARY_PATH
@@ -297,14 +297,21 @@ build_kernel()
 			CROSS_COMPILE=$for64- \
 			CROSS_COMPILE_ARM32=$for32- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
-			CC=clang \
-			LD=$for64-ld.lld  
+			CC=clang LLVM_IAS=1 \
+			LD=$for64-ld.gold LDGOLD=$for64-ld.gold HOSTLD=$TC_DIR/bin/ld \
+                        LD_COMPAT=$GCC64_DIR/bin/$for32-ld   
 	) 
 	elif [ $COMPILER = "gcc" ]
 	then
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
-			CROSS_COMPILE=aarch64-elf- -Wno-format 
+			CROSS_COMPILE=aarch64-elf- \
+			AR=aarch64-elf-ar \
+			OBJDUMP=aarch64-elf-objdump \
+			STRIP=aarch64-elf-strip \
+			NM=aarch64-elf-nm \
+			OBJCOPY=aarch64-elf-objcopy \
+			LD=aarch64-elf-$LINKER
 		)
 	fi
 	
