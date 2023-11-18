@@ -171,8 +171,14 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	if [ $COMPILER = "gcc" ]
 	then
 		msger -n "|| Cloning GCC 9.3.0 baremetal ||"
-		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64
-		git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32
+		git clone --depth=50 https://github.com/arter97/arm64-gcc.git gcc64
+		cd gcc64 || exit
+		git reset --hard 811a3bc6b40ad924cd1a24a481b6ac5d9227ff7e
+		cd $KERNEL_DIR || exit
+		git clone --depth=50 https://github.com/arter97/arm32-gcc.git gcc32
+  		cd gcc32 || exit
+		git reset --hard 566df579fa8123a5357c4bdcbbe62a192c5b37b4
+		cd $KERNEL_DIR || exit
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
@@ -305,13 +311,7 @@ build_kernel()
 	then
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
-			CROSS_COMPILE=aarch64-elf- \
-			AR=aarch64-elf-ar \
-			OBJDUMP=aarch64-elf-objdump \
-			STRIP=aarch64-elf-strip \
-			NM=aarch64-elf-nm \
-			OBJCOPY=aarch64-elf-objcopy \
-			LD=aarch64-elf-$LINKER
+			CROSS_COMPILE=aarch64-elf- -Wno-format 
 		)
 	fi
 	
