@@ -73,9 +73,9 @@ DEVICE="fog"
 # your device or check source
 DEFCONFIG=vendor/fog-perf_defconfig
 
-# Specify compiler. 
+# Specify compiler.
 # 'clang' or 'gcc'
-COMPILER=gcc
+COMPILER=clang
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
@@ -160,7 +160,7 @@ KERVER=$(make kernelversion)
 # Set a commit head
 COMMIT_HEAD=$(git log --oneline -1)
 
-# Set Date 
+# Set Date
 DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 
 #Now Its time for other stuffs like cloning, exporting, etc
@@ -176,7 +176,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
-	
+
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
@@ -289,7 +289,7 @@ build_kernel()
         fi
 
 	BUILD_START=$(date +"%s")
-	
+
 	if [ $COMPILER = "clang" ]
 	then
 		MAKE+=(
@@ -314,7 +314,7 @@ build_kernel()
 			LD=aarch64-elf-$LINKER
 		)
 	fi
-	
+
 	if [ $SILENCE = "1" ]
 	then
 		MAKE+=( -s )
@@ -356,7 +356,7 @@ build_kernel()
 				tg_post_build "error.log" "*Build failed to compile after $((DIFF / 60)) minute(s) and $((DIFF % 60)) seconds*"
 			fi
 		fi
-	
+
 }
 
 ##--------------------------------------------------------------##
