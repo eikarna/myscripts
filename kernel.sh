@@ -75,7 +75,7 @@ DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler.
 # 'clang' or 'gcc'
-COMPILER=clang
+COMPILER=gcc
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
@@ -297,7 +297,7 @@ build_kernel()
 			CROSS_COMPILE=$for64- \
 			CROSS_COMPILE_ARM32=$for32- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
-			CC=clang LLVM_IAS=1 \
+			CC=clang LLVM_IAS=1 PYTHON=python3 \
 			AR=llvm-ar OBJDUMP=llvm-objdump STRIP=llvm-strip NM=llvm-nm \
 			LD=$for64-ld LDGOLD=$for64-ld.gold HOSTLD=$TC_DIR/bin/ld \
                         LD_COMPAT=$GCC64_DIR/bin/$for32-ld   
@@ -307,6 +307,7 @@ build_kernel()
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
 			CROSS_COMPILE=aarch64-elf- \
+			PYTHON=python3 \
 			AR=aarch64-elf-ar \
 			OBJDUMP=aarch64-elf-objdump \
 			STRIP=aarch64-elf-strip \
