@@ -23,7 +23,7 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss $KERNEL && cd $KERNEL
+git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss-upstream $KERNEL && cd $KERNEL
 export LOCALVERSION=3.5/Eirene🐙✨
 
 # Bail out if script fails
@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T4-KSU"
+ZIPNAME="sea-Eirene-T4-NONSLMK-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -75,7 +75,7 @@ DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler.
 # 'clang' or 'gcc'
-COMPILER=gcc
+COMPILER=clang
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
