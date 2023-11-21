@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Kentanglu/Sea_Kernel-Fog.git -b fog-r-oss-upstream $KERNEL && cd $KERNEL
-export LOCALVERSION=3.5/Eirene🐙✨
+export LOCALVERSION=3.5/Aero🐲✨
 
 # Bail out if script fails
 set -e
