@@ -23,8 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b fog-r-oss-release $KERNEL && cd $KERNEL
-export LOCALVERSION=1/Eirene🐲✨
+git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b sea-new $KERNEL && cd $KERNEL
+export LOCALVERSION=0/CumaEvosT1🐲✨
 
 # Bail out if script fails
 set -e
@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T5-SLMK-KSU"
+ZIPNAME="sea-CumaEvos-T1"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -297,10 +297,7 @@ build_kernel()
 			CROSS_COMPILE=$for64- \
 			CROSS_COMPILE_ARM32=$for32- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
-			CC=clang LLVM_IAS=1 PYTHON=python3 \
-			AR=llvm-ar OBJDUMP=llvm-objdump STRIP=llvm-strip NM=llvm-nm \
-			LD=$for64-ld LDGOLD=$for64-ld.gold HOSTLD=$TC_DIR/bin/ld \
-                        LD_COMPAT=$GCC64_DIR/bin/$for32-ld   
+			CC=clang
 	) 
 	elif [ $COMPILER = "gcc" ]
 	then
