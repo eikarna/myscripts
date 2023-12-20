@@ -179,9 +179,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 
 	if [ $COMPILER = "clang" ]
 	then
-                mkdir clang-llvm
-		wget -q https://android.googlesource.com/platform//prebuilts/clang/host/linux-x86/+archive/refs/heads/main/clang-r450784e.tar.gz -O "clang-r450784e.tar.gz"
-                tar -xf clang-r450784e.tar.gz -C clang-llvm
+                git clone https://github.com/Nicklas373/aosp-clang -b r412851 clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
@@ -293,7 +291,6 @@ build_kernel()
 	if [ $COMPILER = "clang" ]
 	then
 		MAKE+=(
-          		LD_LIBRARY_PATH=$TC_DIR/lib:$GCC64_DIR/lib:$GCC32_DIR/lib:${LD_LIBRARY_PATH} \
 			CROSS_COMPILE=$for64- \
 			CROSS_COMPILE_ARM32=$for32- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
