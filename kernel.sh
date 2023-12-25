@@ -23,7 +23,7 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b fog-r-oss-release $KERNEL && cd $KERNEL
+git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b test $KERNEL && cd $KERNEL
 export LOCALVERSION=1/EireneTC1🐲✨
 
 # Bail out if script fails
