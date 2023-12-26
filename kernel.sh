@@ -23,7 +23,7 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b test $KERNEL && cd $KERNEL
+git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b fog-r-oss-release $KERNEL && cd $KERNEL
 export LOCALVERSION=1/Eirene🐲✨
 
 # Bail out if script fails
@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T6-KSU"
+ZIPNAME="sea-Eirene-T6s-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
