@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Eirene-T6t2-KSU"
+ZIPNAME="sea-Eirene-T6z-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -285,6 +285,14 @@ build_kernel()
            patch -p1 < "$patch_file"
         done
         fi
+
+        if [ $KSU = 1 ]
+	then
+           for patch_file in $KERNEL_DIR/patchs/KernelSU_umount.patch
+	do
+           patch -p1 < "$patch_file"
+        done
+        fi 
 
 	BUILD_START=$(date +"%s")
 
