@@ -172,7 +172,7 @@ DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 	then
 		msger -n "|| Cloning GCC 9.3.0 baremetal ||"
 		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64
-		git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32
+		git clone --depth=1 https://github.com/arter97/arm32-gcc.git gcc32
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
@@ -288,9 +288,9 @@ build_kernel()
 
         if [ $KSU = 1 ]
 	then
-           for patch_file in $KERNEL_DIR/patchs/KernelSU_umount.patch
+           for patch1_file in $KERNEL_DIR/patchs/KernelSU_umount.patch
 	do
-           patch -p1 < "$patch_file"
+           patch -p1 < "$patch1_file"
         done
         fi 
 
@@ -309,7 +309,6 @@ build_kernel()
 		MAKE+=(
 			CROSS_COMPILE_ARM32=arm-eabi- \
 			CROSS_COMPILE=aarch64-elf- \
-			PYTHON=python3 \
 			AR=aarch64-elf-ar \
 			OBJDUMP=aarch64-elf-objdump \
 			STRIP=aarch64-elf-strip \
