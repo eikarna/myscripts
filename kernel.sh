@@ -162,6 +162,7 @@ COMMIT_HEAD=$(git log --oneline -1)
 
 # Set Date
 DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
+WAKTU=$(date +"%F-%S")
 
 #Now Its time for other stuffs like cloning, exporting, etc
 
@@ -376,7 +377,7 @@ gen_zip()
 	zip -r $DEVICE-"$ZIPNAME" . -x ".git*" -x "README.md" -x "*.zip"
 
 	## Prepare a final zip variable
-	ZIP_FINAL="$DEVICE-$ZIPNAME"
+	ZIP_FINAL="$DEVICE-$ZIPNAME-$WAKTU"
 
 	if [ $SIGN = 1 ]
 	then
