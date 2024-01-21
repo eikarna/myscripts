@@ -374,7 +374,7 @@ gen_zip()
 		mv "$KERNEL_DIR"/out/arch/arm64/boot/dtbo.img AnyKernel3/dtbo.img
 	fi
 	cdir AnyKernel3
-	zip -r $DEVICE-"$ZIPNAME" . -x ".git*" -x "README.md" -x "*.zip"
+	zip -r $DEVICE-$ZIPNAME-"$WAKTU" . -x ".git*" -x "README.md" -x "*.zip"
 
 	## Prepare a final zip variable
 	ZIP_FINAL="$DEVICE-$ZIPNAME-$WAKTU"
