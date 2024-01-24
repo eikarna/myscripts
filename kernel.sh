@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b fog-r-oss-release $KERNEL && cd $KERNEL
-export LOCALVERSION=2PLT/Ailyns🐲✨
+export LOCALVERSION=2/AilynsKSU🐲✨
 
 # Bail out if script fails
 set -e
@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-Ailyns-T3Pelt-NONKSU"
+ZIPNAME="sea-Ailyns-T2-KSU"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -107,7 +107,7 @@ FILES=Image.gz
 BUILD_DTBO=0
 
 # PATCH KERNELSU
-KSU=0
+KSU=1
 if [ $KSU = 1 ]
 then
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
