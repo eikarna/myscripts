@@ -155,7 +155,7 @@ export KBUILD_BUILD_HOST=$(uname -a | awk '{print $2}')
 TERM=xterm
 
 #Check Kernel Version
-KERVER=$(make kernelversion)
+#KERVER=$(make kernelversion)
 
 # Set a commit head
 COMMIT_HEAD=$(git log --oneline -1)
