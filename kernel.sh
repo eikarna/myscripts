@@ -75,7 +75,7 @@ DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler.
 # 'clang' or 'gcc'
-COMPILER=gcc
+COMPILER=clang
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
@@ -155,7 +155,7 @@ export KBUILD_BUILD_HOST=$(uname -a | awk '{print $2}')
 TERM=xterm
 
 #Check Kernel Version
-#KERVER=$(make kernelversion)
+KERVER=$(make kernelversion)
 
 # Set a commit head
 COMMIT_HEAD=$(git log --oneline -1)
@@ -180,16 +180,19 @@ WAKTU=$(date +"%F-%S")
 
 	if [ $COMPILER = "clang" ]
 	then
-                git clone https://github.com/Nicklas373/aosp-clang -b r412851 clang-llvm
+                git clone https://gitlab.com/ElectroPerf/atom-x-clang clang-llvm --depth=1
 		git clone https://github.com/ZyCromerZ/aarch64-linux-android-4.9 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-linux-androideabi-4.9 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
                 for64=aarch64-linux-android
                 for32=arm-linux-androideabi
+		ClangMoreStrings="AR=llvm-ar NM=llvm-nm AS=llvm-as STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump READELF=llvm-readelf HOSTAR=llvm-ar HOSTAS=llvm-as LD_LIBRARY_PATH=$clangDir/lib LD=ld.lld HOSTLD=ld.lld"
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
-  		export LD_LIBRARY_PATH=$TC_DIR/bin/:$GCC64_DIR/bin/:$GCC32_DIR/bin/:$LD_LIBRARY_PATH
+  		export LLVM=1
+		export LLVM_IAS=1
+                export LD_LIBRARY_PATH=$TC_DIR/bin/:$GCC64_DIR/bin/:$GCC32_DIR/bin/:$LD_LIBRARY_PATH
 	fi
 
 	msger -n "|| Cloning Anykernel ||"
@@ -300,10 +303,12 @@ build_kernel()
 	if [ $COMPILER = "clang" ]
 	then
 		MAKE+=(
+  			CC=clang \
 			CROSS_COMPILE=$for64- \
 			CROSS_COMPILE_ARM32=$for32- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
-			CC=clang
+        		HOSTCC=gcc \
+	  		HOSTCXX=g++ ${ClangMoreStrings}
 	) 
 	elif [ $COMPILER = "gcc" ]
 	then
