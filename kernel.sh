@@ -23,8 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/Sea_Kernel-Fog.git -b fog-r-oss-release $KERNEL && cd $KERNEL
-export LOCALVERSION=3/RedLiens🐙✨
+git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss $KERNEL && cd $KERNEL
+export LOCALVERSION=🐙✨
 
 # Bail out if script fails
 set -e
@@ -54,11 +54,12 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="sea-RedLiens-T1"
+ZIPNAME="SeaWE-KSU-T1"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Asyanx"
+HOSTR="#FunProject"
 
 # Architecture
 ARCH=arm64
@@ -107,7 +108,7 @@ FILES=Image.gz
 BUILD_DTBO=0
 
 # PATCH KERNELSU
-KSU=0
+KSU=1
 if [ $KSU = 1 ]
 then
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
@@ -212,6 +213,7 @@ WAKTU=$(date +"%F-%S")
 exports()
 {
 	KBUILD_BUILD_USER=$AUTHOR
+	KBUILD_BUILD_HOST=$HOSTR
 	SUBARCH=$ARCH
 
 	if [ $COMPILER = "clang" ]
