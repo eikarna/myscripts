@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss $KERNEL && cd $KERNEL
-export LOCALVERSION=🐙✨
+export LOCALVERSION=🐉
 
 # Bail out if script fails
 set -e
@@ -111,7 +111,7 @@ BUILD_DTBO=0
 KSU=1
 if [ $KSU = 1 ]
 then
-curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s main
+curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
 fi
@@ -182,8 +182,8 @@ WAKTU=$(date +"%F-%S")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/19.0.0git-20240213-release/Clang-19.0.0git-20240213.tar.gz -O "Clang-19.0.0git-20240213.tar.gz"
-                tar -xf Clang-19.0.0git-20240213.tar.gz -C clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/19.0.0git-20240311-release/Clang-19.0.0git-20240311.tar.gz -O "Clang-19.0.0git-20240311.tar.gz"
+                tar -xf Clang-19.0.0git-20240311.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
