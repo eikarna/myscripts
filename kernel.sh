@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="SeaWE-KSU-T1"
+ZIPNAME="SeaWE-KSU-T2"
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -182,8 +182,8 @@ WAKTU=$(date +"%F-%S")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/19.0.0git-20240311-release/Clang-19.0.0git-20240311.tar.gz -O "Clang-19.0.0git-20240311.tar.gz"
-                tar -xf Clang-19.0.0git-20240311.tar.gz -C clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/19.0.0git-20240315-release/Clang-19.0.0git-20240315.tar.gz -O "Clang-19.0.0git-20240315.tar.gz"
+                tar -xf Clang-19.0.0git-20240315.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
