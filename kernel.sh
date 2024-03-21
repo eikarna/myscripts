@@ -294,14 +294,6 @@ build_kernel()
         done
         fi
 
-        if [ $KSU = 1 ]
-	then
-           for patch1_file in $KERNEL_DIR/patchs/KernelSU_umount.patch
-	do
-           patch -p1 < "$patch1_file"
-        done
-        fi 
-
 	BUILD_START=$(date +"%s")
 
 	if [ $COMPILER = "clang" ]
