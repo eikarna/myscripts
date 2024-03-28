@@ -24,7 +24,6 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss-test $KERNEL && cd $KERNEL
-git reset --hard ef9b908a2ed78c1cbedb6e9d91a8ee051876947b
 export LOCALVERSION=🐉/Uclamp
 
 # Bail out if script fails
