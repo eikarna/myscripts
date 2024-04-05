@@ -53,8 +53,24 @@ cdir()
 KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
+# PATCH KERNELSU & RELEASE VERSION
+KSU=0
+release=T4
+if [ $KSU = 1 ]
+then
+	curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+	KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
+	KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
+fi
+
 # The name of the Kernel, to name the ZIP
-ZIPNAME="SeaWE-KSU-UClamp-T4"
+if [ $KSU = 1 ]
+then
+   ZIPNAME="SeaWE-KSU-UClamp-$release"
+else
+    ZIPNAME="SeaWE-NONKSU-UClamp-$release"
+    fi
+fi
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
@@ -106,21 +122,6 @@ FILES=Image.gz
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
 BUILD_DTBO=0
-
-# PATCH KERNELSU
-KSU=1
-
-if [ $KSU = 1 ]
-then
-curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
-KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
-KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
-fi
-
-if [ $KSU = 0 ]
-then
-KERNELSU_VERSION=NONKSU
-fi
 
 # Sign the zipfile
 # 1 is YES | 0 is NO
@@ -274,9 +275,12 @@ build_kernel()
 		make mrproper && rm -rf out
 	fi
 
-	if [ "$PTTG" = 1 ]
+	if [ "$KSU" = 1 ]
  	then
-		tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>KernelSU Version : </b><code>$KERNELSU_VERSION</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>"
+		tg_post_msg "<b>Sea CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>KernelSU: </b><code>$KERNELSU_VERSION</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>"
+	else
+		tg_post_msg "<b>Sea CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>NON KernelSU </b><b>Top Commit : </b><code>$COMMIT_HEAD</code>"
+    	fi
 	fi
 
 	make O=out $DEFCONFIG
