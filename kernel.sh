@@ -109,11 +109,17 @@ BUILD_DTBO=0
 
 # PATCH KERNELSU
 KSU=1
+
 if [ $KSU = 1 ]
 then
 curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
 KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
+fi
+
+if [ $KSU = 0 ]
+then
+KERNELSU_VERSION=NONKSU
 fi
 
 # Sign the zipfile
@@ -301,8 +307,8 @@ build_kernel()
 			CROSS_COMPILE_ARM32=arm-zyc-linux-gnueabi- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
         		HOSTCC=gcc \
-	  		HOSTCXX=g++ AR=llvm-ar NM=llvm-nm AS=llvm-as STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump READELF=llvm-readelf HOSTAR=llvm-ar HOSTAS=llvm-as LD_LIBRARY_PATH=$clangDir/lib LD=ld.lld HOSTLD=ld.lld
-	) 
+	  		HOSTCXX=g++ ${ClangMoreStrings}
+     ) 
 	elif [ $COMPILER = "gcc" ]
 	then
 		MAKE+=(
