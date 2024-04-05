@@ -182,15 +182,12 @@ WAKTU=$(date +"%F-%S")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/19.0.0git-20240322-release/Clang-19.0.0git-20240322.tar.gz -O "Clang-19.0.0git-20240322.tar.gz"
-                tar -xf Clang-19.0.0git-20240322.tar.gz -C clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/19.0.0git-20240405-release/Clang-19.0.0git-20240405.tar.gz -O "Clang-19.0.0git-20240405.tar.gz"
+                tar -xf Clang-19.0.0git-20240405.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
-                for64=aarch64-zyc-linux-gnu
-                for32=arm-zyc-linux-gnueabi
-		ClangMoreStrings="AR=llvm-ar NM=llvm-nm AS=llvm-as STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump READELF=llvm-readelf HOSTAR=llvm-ar HOSTAS=llvm-as LD_LIBRARY_PATH=$clangDir/lib LD=ld.lld HOSTLD=ld.lld"
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
   		export LLVM=1
@@ -300,11 +297,11 @@ build_kernel()
 	then
 		MAKE+=(
   			CC=clang \
-			CROSS_COMPILE=$for64- \
-			CROSS_COMPILE_ARM32=$for32- \
+			CROSS_COMPILE=aarch64-zyc-linux-gnu- \
+			CROSS_COMPILE_ARM32=arm-zyc-linux-gnueabi- \
    			CLANG_TRIPLE=aarch64-linux-gnu- \
         		HOSTCC=gcc \
-	  		HOSTCXX=g++ ${ClangMoreStrings}
+	  		HOSTCXX=g++ AR=llvm-ar NM=llvm-nm AS=llvm-as STRIP=llvm-strip OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump READELF=llvm-readelf HOSTAR=llvm-ar HOSTAS=llvm-as LD_LIBRARY_PATH=$clangDir/lib LD=ld.lld HOSTLD=ld.lld
 	) 
 	elif [ $COMPILER = "gcc" ]
 	then
