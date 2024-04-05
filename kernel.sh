@@ -69,7 +69,6 @@ then
    ZIPNAME="SeaWE-KSU-UClamp-$release"
 else
     ZIPNAME="SeaWE-NONKSU-UClamp-$release"
-    fi
 fi
 
 # Build Author
@@ -281,7 +280,6 @@ build_kernel()
 	else
 		tg_post_msg "<b>Sea CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>NON KernelSU </b><b>Top Commit : </b><code>$COMMIT_HEAD</code>"
     	fi
-	fi
 
 	make O=out $DEFCONFIG
 	if [ $DEF_REG = 1 ]
