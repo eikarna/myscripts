@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss-staging $KERNEL && cd $KERNEL
-export LOCALVERSION=🐉/Staging
+export LOCALVERSION=🌊/Tsunami
 
 # Bail out if script fails
 set -e
@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
-KSU=1
+KSU=0
 release=T4
 if [ $KSU = 1 ]
 then
