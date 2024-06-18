@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss-staging $KERNEL && cd $KERNEL
-export LOCALVERSION=🦞/Lobster
+export LOCALVERSION=🦈/shark
 
 # Bail out if script fails
 set -e
@@ -55,7 +55,7 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
 KSU=1
-release=T8
+release=R1
 if [ $KSU = 1 ]
 then
 	curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
@@ -66,9 +66,9 @@ fi
 # The name of the Kernel, to name the ZIP
 if [ $KSU = 1 ]
 then
-   ZIPNAME="SeaWE-KSU-UClamp-$release"
+   ZIPNAME="SeaWE-KSU-$release"
 else
-    ZIPNAME="SeaWE-NONKSU-UClamp-$release"
+    ZIPNAME="SeaWE-NONKSU-$release"
 fi
 
 # Build Author
