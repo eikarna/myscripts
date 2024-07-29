@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss-staging $KERNEL && cd $KERNEL
-export LOCALVERSION=🐋/whale
+export LOCALVERSION=🍣/sushi
 
 # Bail out if script fails
 set -e
@@ -55,7 +55,7 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
 KSU=1
-release=R1
+release=R1.1
 if [ $KSU = 1 ]
 then
 	curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s main
@@ -202,7 +202,7 @@ WAKTU=$(date +"%F-%S")
 	fi
 
 	msger -n "|| Cloning Anykernel ||"
-	git clone --depth=1 https://github.com/Kentanglu/AnyKernel3-680 -b master AnyKernel3
+	git clone --depth=1 https://github.com/Asyanx/AnyKernel3 -b master AnyKernel3
 
 	if [ $BUILD_DTBO = 1 ]
 	then
