@@ -54,10 +54,11 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
-KSU=0
+KSU=1
 release=R2
 if [ $KSU = 1 ]
 then
+	echo "CONFIG_SUS_FS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
 	curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/main/kernel/setup.sh" | bash -s main
 	KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 	KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
