@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss-staging $KERNEL && cd $KERNEL
-export LOCALVERSION=🍣/sushi
+export LOCALVERSION=🐝/bee
 
 # Bail out if script fails
 set -e
@@ -54,8 +54,8 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
-KSU=0
-release=R2
+KSU=1
+release=R2.5
 if [ $KSU = 1 ]
 then
 	echo "CONFIG_SUS_FS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
@@ -67,9 +67,9 @@ fi
 # The name of the Kernel, to name the ZIP
 if [ $KSU = 1 ]
 then
-   ZIPNAME="SeaWE-KSU-$release"
+   ZIPNAME="SeaWE-KSU"
 else
-    ZIPNAME="SeaWE-NONKSU-$release"
+    ZIPNAME="SeaWE-NONKSU"
 fi
 
 # Build Author
@@ -381,10 +381,10 @@ gen_zip()
 		mv "$KERNEL_DIR"/out/arch/arm64/boot/dtbo.img AnyKernel3/dtbo.img
 	fi
 	cdir AnyKernel3
-	zip -r $DEVICE-$ZIPNAME-"$WAKTU" . -x ".git*" -x "README.md" -x "*.zip"
+	zip -r $DEVICE-$ZIPNAME-$release-"$WAKTU" . -x ".git*" -x "README.md" -x "*.zip"
 
 	## Prepare a final zip variable
-	ZIP_FINAL="$DEVICE-$ZIPNAME-$WAKTU"
+	ZIP_FINAL="$DEVICE-$ZIPNAME-$release-$WAKTU"
 
 	if [ $SIGN = 1 ]
 	then
