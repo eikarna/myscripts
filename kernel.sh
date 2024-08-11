@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b fog-r-oss-staging $KERNEL && cd $KERNEL
-export LOCALVERSION=🐝/bee
+export LOCALVERSION=✨🐝
 
 # Bail out if script fails
 set -e
@@ -55,7 +55,7 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
 KSU=1
-release=R3
+release=R1s
 if [ $KSU = 1 ]
 then
 	echo "CONFIG_SUS_FS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
@@ -67,9 +67,9 @@ fi
 # The name of the Kernel, to name the ZIP
 if [ $KSU = 1 ]
 then
-   ZIPNAME="SeaWE-KSU"
+   ZIPNAME="Luna-KSU"
 else
-    ZIPNAME="SeaWE-NONKSU"
+    ZIPNAME="Luna-NONKSU"
 fi
 
 # Build Author
