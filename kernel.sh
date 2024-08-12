@@ -54,8 +54,8 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
-KSU=0
-release=T1s
+KSU=1
+release=T2
 if [ $KSU = 1 ]
 then
 	echo "CONFIG_SUS_FS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
@@ -189,8 +189,8 @@ WAKTU=$(date +"%F-%S")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/19.0.0git-20240717-release/Clang-19.0.0git-20240717.tar.gz -O "Clang-19.0.0git-20240717.tar.gz"
-                tar -xf Clang-19.0.0git-20240717.tar.gz -C clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/20.0.0git-20240811-release/Clang-20.0.0git-20240811.tar.gz -O "Clang-20.0.0git-20240811.tar.gz"
+                tar -xf Clang-20.0.0git-20240811.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
