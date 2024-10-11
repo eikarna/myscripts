@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b bucin-kila $KERNEL && cd $KERNEL
-export LOCALVERSION=✨😍
+export LOCALVERSION=♥️✨
 
 # Bail out if script fails
 set -e
@@ -75,7 +75,7 @@ fi
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Asyanx"
-HOSTR="AlixKila"
+HOSTR="Kila"
 
 # Architecture
 ARCH=arm64
@@ -189,8 +189,8 @@ WAKTU=$(date +"%F-%S")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/20.0.0git-20240926-release/Clang-20.0.0git-20240926.tar.gz -O "Clang-20.0.0git-20240926.tar.gz"
-                tar -xf Clang-20.0.0git-20240926.tar.gz -C clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/20.0.0git-20241011-release/Clang-20.0.0git-20241011.tar.gz -O "Clang-20.0.0git-20241011.tar.gz"
+                tar -xf Clang-20.0.0git-20241011.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 		GCC64_DIR=$KERNEL_DIR/gcc64
