@@ -76,8 +76,8 @@ fi
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="KiLali"
-HOSTR="1SeeBu"
+AUTHOR="Mine"
+HOSTR="Lovely"
 
 # Architecture
 ARCH=arm64
