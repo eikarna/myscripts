@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b bucin-kila $KERNEL && cd $KERNEL
-export LOCALVERSION=❤️🫀
+export LOCALVERSION=🐊/buaya
 
 # Bail out if script fails
 set -e
@@ -66,7 +66,7 @@ then
 fi
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="SeaTest"
+ZIPNAME="Sea"
 if [ $KSU = 1 ]
 then
    VER="$RELEASE-KSU"
@@ -76,8 +76,8 @@ fi
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="Mine"
-HOSTR="Lovely"
+AUTHOR="Asyanx"
+HOSTR="xAsEa"
 
 # Architecture
 ARCH=arm64
