@@ -54,7 +54,7 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
-KSU=0
+KSU=1
 RELEASE=R3s
 if [ $KSU = 1 ]
 then
