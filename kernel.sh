@@ -58,9 +58,9 @@ KSU=1
 RELEASE=R3s
 if [ $KSU = 1 ]
 then
-	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
-	echo "# CONFIG_KSU_DEBUG is not set" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
-	echo "CONFIG_SUS_FS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+#	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+#	echo "# CONFIG_KSU_DEBUG is not set" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+#	echo "CONFIG_SUS_FS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
 	KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 	KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
 fi
