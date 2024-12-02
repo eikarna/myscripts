@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=5 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b sea-r-oss $KERNEL && cd $KERNEL
-git reset --hard HEAD^1
+git reset --hard ab0f79457cd10ffcbd700f06fcc4e48660e39474
 export LOCALVERSION=🐊/buaya
 
 # Bail out if script fails
