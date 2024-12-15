@@ -23,9 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=5 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b sea-r-oss $KERNEL && cd $KERNEL
-git reset --hard HEAD^1
-export LOCALVERSION=🦐/Udang
+git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b sea-r-oss $KERNEL && cd $KERNEL
+export LOCALVERSION=🦔/Landak
 
 # Bail out if script fails
 set -e
@@ -55,8 +54,8 @@ KERNEL_DIR="$(pwd)"
 BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
-KSU=0
-RELEASE=R4
+KSU=1
+RELEASE=R4s
 if [ $KSU = 1 ]
 then
 	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
