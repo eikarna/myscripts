@@ -190,7 +190,8 @@ WAKTU=$(date +"%F-%S")
 
 	if [ $COMPILER = "clang" ]
 	then
-        	wget mkdir clang-llvm && curl https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android14-release/clang-r487747c.tar.gz -RLO && tar -C clang-llvm/ -xf clang-*.tar.gz
+         	mkdir clang-llvm
+        	wget && curl https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android14-release/clang-r487747c.tar.gz -RLO && tar -C clang-llvm/ -xf clang-*.tar.gz
 		git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 aarch64-linux-android-4.9 --depth=1
 #               git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
 #		GCC64_DIR=$KERNEL_DIR/gcc64
