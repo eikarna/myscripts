@@ -23,8 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b sea-r-oss $KERNEL && cd $KERNEL
-export LOCALVERSION=🦔/Landak
+git clone --single-branch --depth=1 https://github.com/Asyanx/kernel_xiaomi_sm6225 -b fog $KERNEL && cd $KERNEL
+export LOCALVERSION=✨🦄
 
 # Bail out if script fails
 set -e
@@ -55,12 +55,12 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
 KSU=1
-RELEASE=R4s
+RELEASE=X1
 if [ $KSU = 1 ]
 then
-	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
-	echo "# CONFIG_KSU_DEBUG is not set" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
-	echo "CONFIG_KSU_SUSFS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+#	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+#	echo "# CONFIG_KSU_DEBUG is not set" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+#	echo "CONFIG_KSU_SUSFS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
 	KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 	KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
 fi
@@ -77,7 +77,7 @@ fi
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Asyanx"
-HOSTR="EOL"
+HOSTR="CLO"
 
 # Architecture
 ARCH=arm64
