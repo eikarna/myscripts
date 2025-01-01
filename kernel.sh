@@ -23,8 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/kernel_xiaomi_fog-msm4.19 -b 4.19 $KERNEL && cd $KERNEL
-export LOCALVERSION=✨🦄
+git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b sea-r-oss $KERNEL && cd $KERNEL
+export LOCALVERSION=✨🐦‍🔥
 
 # Bail out if script fails
 set -e
@@ -55,12 +55,12 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
 KSU=1
-RELEASE=X1
+RELEASE=R4s+
 if [ $KSU = 1 ]
 then
-#	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
-#	echo "# CONFIG_KSU_DEBUG is not set" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
-#	echo "CONFIG_KSU_SUSFS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+	echo "# CONFIG_KSU_DEBUG is not set" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
+	echo "CONFIG_KSU_SUSFS=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
 	KSU_GIT_VERSION=$(cd KernelSU && git rev-list --count HEAD)
 	KERNELSU_VERSION=$(($KSU_GIT_VERSION + 10000 + 200))
 fi
@@ -69,15 +69,15 @@ fi
 ZIPNAME="Sea"
 if [ $KSU = 1 ]
 then
-   VER="$RELEASE-KSU"
+   VER="$RELEASE-KSU-EOL"
 else
     VER="$RELEASE-NONKSU"
 fi
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="Asyanx"
-HOSTR="CLO"
+AUTHOR="Ali"
+HOSTR="Kila"
 
 # Architecture
 ARCH=arm64
@@ -190,18 +190,24 @@ WAKTU=$(date +"%F-%S")
 
 	if [ $COMPILER = "clang" ]
 	then
-         	mkdir clang-llvm
-        	wget https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/+archive/refs/heads/android14-release/clang-r487747c.tar.gz -O "clang-r487747c.tar.gz" 
-         	tar -xf clang-r487747c.tar.gz -C clang-llvm
-		git clone https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 aarch64-linux-android-4.9 --depth=1
-#               git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
-#		GCC64_DIR=$KERNEL_DIR/gcc64
-#		GCC32_DIR=$KERNEL_DIR/gcc32
-#  		for64=aarch64-zyc-linux-gnu
-#  		for32=arm-zyc-linux-gnueabi
+                mkdir clang-llvm
+		wget https://github.com/ZyCromerZ/Clang/releases/download/20.0.0git-20241206-release/Clang-20.0.0git-20241206.tar.gz -O "Clang-20.0.0git-20241206.tar.gz"
+                tar -xf Clang-20.0.0git-20241206.tar.gz -C clang-llvm
+		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
+                git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
+		GCC64_DIR=$KERNEL_DIR/gcc64
+		GCC32_DIR=$KERNEL_DIR/gcc32
+  		for64=aarch64-zyc-linux-gnu
+  		for32=arm-zyc-linux-gnueabi
 		# Toolchain Directory defaults to clang-llvm
 		TC_DIR=$KERNEL_DIR/clang-llvm
+  		export LLVM=1
+		export LLVM_IAS=1
+                export LD_LIBRARY_PATH=$TC_DIR/bin/:$GCC64_DIR/bin/:$GCC32_DIR/bin/:$LD_LIBRARY_PATH
+		MorePlusPlus="LD=$for64-ld LDGOLD=$for64-ld.gold HOSTLD=${TC_DIR}/bin/ld $MorePlusPlus"
+                MorePlusPlus="LD_COMPAT=${GCC32_DIR}/bin/$for32-ld $MorePlusPlus"
 	fi
+
 	msger -n "|| Cloning Anykernel ||"
 	git clone --depth=1 https://github.com/Asyanx/AnyKernel3 -b master AnyKernel3
 
@@ -223,7 +229,7 @@ exports()
 	if [ $COMPILER = "clang" ]
 	then
 		KBUILD_COMPILER_STRING=$("$TC_DIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
-		PATH=$TC_DIR/bin/:$PATH
+		PATH=$TC_DIR/bin/:$GCC64_DIR/bin/:$GCC32_DIR/bin/:/usr/bin:$PATH
 	elif [ $COMPILER = "gcc" ]
 	then
 		KBUILD_COMPILER_STRING=$("$GCC64_DIR"/bin/aarch64-elf-gcc --version | head -n 1)
@@ -297,8 +303,11 @@ build_kernel()
 	then
 		MAKE+=(
   			CC=clang \
-			CLANG_TRIPLE=aarch64-linux-gnu- \
-   			CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+			CROSS_COMPILE=aarch64-zyc-linux-gnu- \
+			CROSS_COMPILE_ARM32=arm-zyc-linux-gnueabi- \
+   			CLANG_TRIPLE=aarch64-linux-gnu- \
+        		HOSTCC=gcc \
+	  		HOSTCXX=g++ ${MorePlusPlus}
      ) 
 	elif [ $COMPILER = "gcc" ]
 	then
