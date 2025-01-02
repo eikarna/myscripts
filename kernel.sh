@@ -23,8 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b sea-r-oss $KERNEL && cd $KERNEL
-export LOCALVERSION=✨🐦‍🔥
+git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b kila-r-oss $KERNEL && cd $KERNEL
+export LOCALVERSION=✨🫀
 
 # Bail out if script fails
 set -e
@@ -55,7 +55,7 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
 KSU=1
-RELEASE=R4s+
+RELEASE=B+
 if [ $KSU = 1 ]
 then
 	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
@@ -66,10 +66,10 @@ then
 fi
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="Sea"
+ZIPNAME="Kila"
 if [ $KSU = 1 ]
 then
-   VER="$RELEASE-KSU-EOL"
+   VER="$RELEASE-KSU-Bucin"
 else
     VER="$RELEASE-NONKSU"
 fi
@@ -77,7 +77,7 @@ fi
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
 AUTHOR="Ali"
-HOSTR="Kila"
+HOSTR="LoveeU"
 
 # Architecture
 ARCH=arm64
@@ -123,7 +123,7 @@ FILES=Image.gz
 
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
-BUILD_DTBO=0
+BUILD_DTBO=1
 
 # Sign the zipfile
 # 1 is YES | 0 is NO
