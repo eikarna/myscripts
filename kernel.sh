@@ -23,8 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Eikarna/sea_kernel_xiaomi_sm6225 -b nix-r-oss $KERNEL && cd $KERNEL
-export LOCALVERSION= alpha
+git clone --single-branch --depth=1 https://github.com/eikarna/sea_kernel_xiaomi_sm6225 -b nix-r-oss $KERNEL && cd $KERNEL
+export LOCALVERSION=v1
 
 # Bail out if script fails
 set -e
@@ -123,7 +123,7 @@ FILES=Image.gz
 
 # Build dtbo.img (select this only if your source has support to building dtbo.img)
 # 1 is YES | 0 is NO(default)
-BUILD_DTBO=0
+BUILD_DTBO=1
 
 # Sign the zipfile
 # 1 is YES | 0 is NO
