@@ -1,6 +1,6 @@
-name: Asyanx Build
+name: Kernel Build
 
-on: [push]
+on: [push, workflow_dispatch]
 
 jobs:
   kernel-build:
