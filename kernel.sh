@@ -238,7 +238,7 @@ exports()
 
 	BOT_MSG_URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 	BOT_BUILD_URL="https://api.telegram.org/bot$TOKEN/sendDocument"
-	PROCS=$(nproc --all)
+	PROCS=8 # $(nproc --all)
 
 	export KBUILD_BUILD_USER ARCH SUBARCH PATH \
 	       KBUILD_COMPILER_STRING BOT_MSG_URL \
