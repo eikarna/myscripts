@@ -23,8 +23,8 @@ WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
-git clone --single-branch --depth=1 https://github.com/Asyanx/sea_kernel_xiaomi_sm6225 -b kila-r-oss $KERNEL && cd $KERNEL
-export LOCALVERSION=✨🫀
+git clone --single-branch --depth=1 https://github.com/Eikarna/sea_kernel_xiaomi_sm6225 -b nix-r-oss $KERNEL && cd $KERNEL
+export LOCALVERSION= alpha
 
 # Bail out if script fails
 set -e
@@ -66,18 +66,18 @@ then
 fi
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="Kila"
+ZIPNAME="Nix"
 if [ $KSU = 1 ]
 then
-   VER="$RELEASE-KSU-Bucin"
+   VER="$RELEASE-Nix-Alpha"
 else
     VER="$RELEASE-NONKSU"
 fi
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="Ali"
-HOSTR="LoveeU"
+AUTHOR="Eikarna"
+HOSTR="localhost"
 
 # Architecture
 ARCH=arm64
@@ -111,8 +111,8 @@ PTTG=1
 if [ $PTTG = 1 ]
 then
 	# Set Telegram Chat ID
-	CHATID="-1001910249307"
-	TOKEN="5501360993:AAFLnvOrkUpsFJktYu-snmimKNoGk7_WVw8"
+	CHATID="7603823668"
+	TOKEN="7920484462:AAEityU8F-Rpdxips7W6EcnwQJQCgIuLA3w"
 fi
 
 # Generate a full DEFCONFIG prior building. 1 is YES | 0 is NO(default)
@@ -209,7 +209,7 @@ WAKTU=$(date +"%F-%S")
 	fi
 
 	msger -n "|| Cloning Anykernel ||"
-	git clone --depth=1 https://github.com/Asyanx/AnyKernel3 -b master AnyKernel3
+	git clone --depth=1 https://github.com/Eikarna/AnyKernel3 -b master AnyKernel3
 
 	if [ $BUILD_DTBO = 1 ]
 	then
@@ -283,9 +283,9 @@ build_kernel()
 
 	if [ "$KSU" = 1 ]
  	then
-		tg_post_msg "<b>Sea CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>KernelSU: </b><code>$KERNELSU_VERSION</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>"
+		tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>KernelSU: </b><code>$KERNELSU_VERSION</code>%0A<b>Top Commit : </b><code>$COMMIT_HEAD</code>"
 	else
-		tg_post_msg "<b>Sea CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>NON KernelSU:<code>This is not KSU</code>%0A</b><b>Top Commit : </b><code>$COMMIT_HEAD</code>"
+		tg_post_msg "<b>CI Build Triggered</b>%0A<b>Docker OS: </b><code>$DISTRO</code>%0A<b>Kernel Version : </b><code>$KERVER</code>%0A<b>Date : </b><code>$(TZ=Asia/Jakarta date)</code>%0A<b>Device : </b><code>$MODEL [$DEVICE]</code>%0A<b>Host Core Count : </b><code>$PROCS</code>%0A<b>Compiler Used : </b><code>$KBUILD_COMPILER_STRING</code>%0A<b>NON KernelSU:<code>This is not KSU</code>%0A</b><b>Top Commit : </b><code>$COMMIT_HEAD</code>"
     	fi
 
 	make O=out $DEFCONFIG
