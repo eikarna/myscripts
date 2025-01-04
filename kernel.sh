@@ -111,7 +111,7 @@ PTTG=1
 if [ $PTTG = 1 ]
 then
 	# Set Telegram Chat ID
-	CHATID="7603823668"
+	CHATID="-1002263245340"
 	TOKEN="7920484462:AAEityU8F-Rpdxips7W6EcnwQJQCgIuLA3w"
 fi
 
@@ -209,7 +209,7 @@ WAKTU=$(date +"%F-%S")
 	fi
 
 	msger -n "|| Cloning Anykernel ||"
-	git clone --depth=1 https://github.com/Eikarna/AnyKernel3 -b master AnyKernel3
+	git clone --depth=1 https://github.com/eikarna/AnyKernel3 -b master AnyKernel3
 
 	if [ $BUILD_DTBO = 1 ]
 	then
