@@ -24,7 +24,7 @@ KERNEL="$WORKDIR/kernel"
 
 # Cloning Sources
 git clone --single-branch --depth=1 https://github.com/eikarna/sea_kernel_xiaomi_sm6225 -b nix-r-oss $KERNEL && cd $KERNEL
-export LOCALVERSION=v1
+#export LOCALVERSION=
 
 # Bail out if script fails
 set -e
@@ -55,7 +55,7 @@ BASEDIR="$(basename "$KERNEL_DIR")"
 
 # PATCH KERNELSU & RELEASE VERSION
 KSU=1
-RELEASE=B+
+RELEASE=B
 if [ $KSU = 1 ]
 then
 	echo "CONFIG_KSU=y" >> arch/arm64/configs/vendor/"fog-perf_defconfig"
@@ -69,7 +69,7 @@ fi
 ZIPNAME="Nix"
 if [ $KSU = 1 ]
 then
-   VER="$RELEASE-Nix-Alpha"
+   VER="$RELEASE-KSU"
 else
     VER="$RELEASE-NONKSU"
 fi
