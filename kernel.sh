@@ -210,8 +210,8 @@ install_gcc_requirements()
   		# msger -n "|| Install lolshit tools (glibc 2.38) ||"
     		# install_gcc_requirements
   		msger -n "|| Downloading EVA GCC 14 baremetal ||"
-  		wget -q https://github.com/mvaisakh/gcc-build/releases/download/140220240239/eva-gcc-arm64-140220240239.xz -O eva-gcc64.xz
-    		wget -q https://github.com/mvaisakh/gcc-build/releases/download/140220240239/eva-gcc-arm-140220240239.xz -O eva-gcc32.xz
+  		wget https://github.com/mvaisakh/gcc-build/releases/download/140220240239/eva-gcc-arm64-140220240239.xz -O eva-gcc64.xz
+    		wget https://github.com/mvaisakh/gcc-build/releases/download/140220240239/eva-gcc-arm-140220240239.xz -O eva-gcc32.xz
       		msger -n "|| Extracting EVA GCC 14 ||"
 		# Check is valid or no
 		file eva-gcc64.xz
