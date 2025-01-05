@@ -207,22 +207,22 @@ install_gcc_requirements()
 	if [ $COMPILER = "gcc" ]
 	then
 		# msger -n "|| Cloning EVA GCC 15.0.0 baremetal ||"
-  		msger -n "|| Install lolshit tools (glibc 2.38) ||"
-    		install_gcc_requirements
-  		msger -n "|| Downloading EVA GCC 15.0.0 baremetal ||"
-  		wget -q https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm64-02012025.xz -O gcc64.xz
-    		wget -q https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm-02012025.xz -O gcc32.xz
-      		msger -n "|| Extracting EVA GCC 15.0.0 ||"
+  		# msger -n "|| Install lolshit tools (glibc 2.38) ||"
+    		# install_gcc_requirements
+  		msger -n "|| Downloading EVA GCC 14 baremetal ||"
+  		wget -q https://github.com/mvaisakh/gcc-build/releases/download/140220240239/eva-gcc-arm64-140220240239.xz -O eva-gcc64.xz
+    		wget -q https://github.com/mvaisakh/gcc-build/releases/download/140220240239/eva-gcc-arm-140220240239.xz -O eva-gcc32.xz
+      		msger -n "|| Extracting EVA GCC 14 ||"
 		# Check is valid or no
-		file gcc64.xz
-  		file gcc32.xz
+		file eva-gcc64.xz
+  		file eva-gcc32.xz
     		# There is tar file lol
-    		tar -xf gcc64.xz
-      		tar -xf gcc32.xz
+    		tar -xf eva-gcc64.xz
+      		tar -xf eva-gcc32.xz
 		# git clone https://github.com/mvaisakh/gcc-build.git gcc-build
   		# Forget to check its directory inside
-		GCC64_DIR=$KERNEL_DIR/gcc-arm64
-		GCC32_DIR=$KERNEL_DIR/gcc-arm
+		GCC64_DIR=$KERNEL_DIR/eva-gcc-arm64
+		GCC32_DIR=$KERNEL_DIR/eva-gcc-arm
 	fi
 
 	if [ $COMPILER = "clang" ]
