@@ -185,6 +185,7 @@ install_gcc_requirements()
 	../configure --prefix=/opt/glibc-2.36
 	make -s -j8
 	make -s install
+ 	cd ..
 
   	msger -n "|| Downloading, Configuring, and Installing glibc 2.38 ||"
 	wget http://ftp.gnu.org/gnu/libc/glibc-2.38.tar.gz
@@ -195,6 +196,7 @@ install_gcc_requirements()
 	../configure --prefix=/opt/glibc-2.38
 	make -s -j8
 	make -s install
+ 	cd ..
  	export LD_LIBRARY_PATH=/opt/glibc-2.36/lib:/opt/glibc-2.38/lib:$LD_LIBRARY_PATH
 }
 
@@ -207,8 +209,8 @@ install_gcc_requirements()
 	if [ $COMPILER = "gcc" ]
 	then
 		# msger -n "|| Cloning EVA GCC 15.0.0 baremetal ||"
-  		# msger -n "|| Install lolshit tools (glibc 2.38) ||"
-    		# install_gcc_requirements
+  		msger -n "|| Install lolshit tools (glibc 2.38) ||"
+    		install_gcc_requirements
   		msger -n "|| Downloading EVA GCC 14 baremetal ||"
   		wget -q https://github.com/mvaisakh/gcc-build/releases/download/25042024/eva-gcc-arm64-25042024.xz -O gcc64.xz
     		wget -q https://github.com/mvaisakh/gcc-build/releases/download/25042024/eva-gcc-arm-25042024.xz -O gcc32.xz
