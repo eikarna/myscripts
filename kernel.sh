@@ -181,12 +181,17 @@ WAKTU=$(date +"%F-%S")
 	echo " "
 	if [ $COMPILER = "gcc" ]
 	then
-		msger -n "|| Downloading EVA GCC 15.0.0 baremetal ||"
+		# msger -n "|| Cloning EVA GCC 15.0.0 baremetal ||"
+  		msger -n "|| Downloading EVA GCC 15.0.0 baremetal ||"
   		wget https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm64-02012025.xz -O gcc64.xz
     		wget https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm-02012025.xz -O gcc32.xz
       		msger -n "|| Extracting EVA GCC 15.0.0 ||"
-    		unxz gcc64.xz
-      		unxz gcc32.xz
+		# Check is valid or no
+		file gcc64.xz
+  		file gcc32.xz
+    		xz -d gcc64.xz
+      		xz -d gcc32.xz
+		# git clone https://github.com/mvaisakh/gcc-build.git gcc-build
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
