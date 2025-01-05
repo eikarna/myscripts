@@ -178,23 +178,23 @@ install_gcc_requirements()
 {
 	msger -n "|| Downloading, Configuring, and Installing glibc 2.36 ||"
 	wget http://ftp.gnu.org/gnu/libc/glibc-2.36.tar.gz
-	tar -xvf glibc-2.36.tar.gz
+	tar -xf glibc-2.36.tar.gz
 	cd glibc-2.36
 	mkdir build
 	cd build
 	../configure --prefix=/opt/glibc-2.36
-	make -j8
-	sudo make install
+	make -s -j8
+	sudo make -s install
 
   	msger -n "|| Downloading, Configuring, and Installing glibc 2.38 ||"
 	wget http://ftp.gnu.org/gnu/libc/glibc-2.38.tar.gz
-	tar -xvf glibc-2.38.tar.gz
+	tar -xf glibc-2.38.tar.gz
 	cd glibc-2.38
 	mkdir build
 	cd build
 	../configure --prefix=/opt/glibc-2.38
-	make -j8
-	sudo make install
+	make -s -j8
+	sudo make -s install
  	export LD_LIBRARY_PATH=/opt/glibc-2.36/lib:/opt/glibc-2.38/lib:$LD_LIBRARY_PATH
 }
 
@@ -217,8 +217,8 @@ install_gcc_requirements()
 		file gcc64.xz
   		file gcc32.xz
     		# There is tar file lol
-    		tar -xvf gcc64.xz
-      		tar -xvf gcc32.xz
+    		tar -xf gcc64.xz
+      		tar -xf gcc32.xz
 		# git clone https://github.com/mvaisakh/gcc-build.git gcc-build
   		# Forget to check its directory inside
 		GCC64_DIR=$KERNEL_DIR/gcc-arm64
