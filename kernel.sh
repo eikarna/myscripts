@@ -18,6 +18,9 @@
  # limitations under the License.
  #
 
+# Optimization Flags, test only
+export CFLAGS="-O3 -pipe -fomit-frame-pointer -march=native"
+
 # Kernel building script
 WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
@@ -66,7 +69,7 @@ then
 fi
 
 # The name of the Kernel, to name the ZIP
-ZIPNAME="Nix"
+ZIPNAME="NiX"
 if [ $KSU = 1 ]
 then
    VER="$RELEASE-KSU"
@@ -76,7 +79,7 @@ fi
 
 # Build Author
 # Take care, it should be a universal and most probably, case-sensitive
-AUTHOR="Eikarna"
+AUTHOR="eikarna"
 HOSTR="localhost"
 
 # Architecture
@@ -94,7 +97,7 @@ DEFCONFIG=vendor/fog-perf_defconfig
 
 # Specify compiler.
 # 'clang' or 'gcc'
-COMPILER=clang
+COMPILER=gcc
 
 # Build modules. 0 = NO | 1 = YES
 MODULES=0
