@@ -184,7 +184,7 @@ install_gcc_requirements()
 	cd build
 	../configure --prefix=/opt/glibc-2.36
 	make -s -j8
-	sudo make -s install
+	make -s install
 
   	msger -n "|| Downloading, Configuring, and Installing glibc 2.38 ||"
 	wget http://ftp.gnu.org/gnu/libc/glibc-2.38.tar.gz
@@ -194,7 +194,7 @@ install_gcc_requirements()
 	cd build
 	../configure --prefix=/opt/glibc-2.38
 	make -s -j8
-	sudo make -s install
+	make -s install
  	export LD_LIBRARY_PATH=/opt/glibc-2.36/lib:/opt/glibc-2.38/lib:$LD_LIBRARY_PATH
 }
 
