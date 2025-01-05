@@ -197,7 +197,7 @@ install_gcc_requirements()
 	make -s -j8
 	make -s install
  	cd ../..
- 	export LD_LIBRARY_PATH=/opt/glibc-2.36/lib:/opt/glibc-2.38/lib:$LD_LIBRARY_PATH
+ 	# export LD_LIBRARY_PATH=/opt/glibc-2.36/lib:/opt/glibc-2.38/lib:$LD_LIBRARY_PATH
 }
 
 
@@ -360,7 +360,8 @@ build_kernel()
 			STRIP=aarch64-elf-strip \
 			NM=aarch64-elf-nm \
 			OBJCOPY=aarch64-elf-objcopy \
-			LD=aarch64-elf-$LINKER
+			LD=aarch64-elf-$LINKER \
+   			LDFLAGS="-Wl,-rpath=/opt/glibc-2.38/lib/"
 		)
 	fi
 
