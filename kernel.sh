@@ -174,6 +174,31 @@ COMMIT_HEAD=$(git log --oneline -1)
 DATE=$(TZ=Asia/Jakarta date +"%Y%m%d-%T")
 WAKTU=$(date +"%F-%S")
 
+install_gcc_requirements()
+{
+	msger -n "|| Downloading, Configuring, and Installing glibc 2.36 ||"
+	wget http://ftp.gnu.org/gnu/libc/glibc-2.36.tar.gz
+	tar -xvf glibc-2.36.tar.gz
+	cd glibc-2.36
+	mkdir build
+	cd build
+	../configure --prefix=/opt/glibc-2.36
+	make -j8
+	sudo make install
+
+  	msger -n "|| Downloading, Configuring, and Installing glibc 2.38 ||"
+	wget http://ftp.gnu.org/gnu/libc/glibc-2.38.tar.gz
+	tar -xvf glibc-2.38.tar.gz
+	cd glibc-2.38
+	mkdir build
+	cd build
+	../configure --prefix=/opt/glibc-2.38
+	make -j8
+	sudo make install
+ 	export LD_LIBRARY_PATH=/opt/glibc-2.36/lib:/opt/glibc-2.38/lib:$LD_LIBRARY_PATH
+}
+
+
 #Now Its time for other stuffs like cloning, exporting, etc
 
  clone()
@@ -182,6 +207,8 @@ WAKTU=$(date +"%F-%S")
 	if [ $COMPILER = "gcc" ]
 	then
 		# msger -n "|| Cloning EVA GCC 15.0.0 baremetal ||"
+  		msger -n "|| Install lolshit tools (glibc 2.38) ||"
+    		install_gcc_requirements
   		msger -n "|| Downloading EVA GCC 15.0.0 baremetal ||"
   		wget -q https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm64-02012025.xz -O gcc64.xz
     		wget -q https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm-02012025.xz -O gcc32.xz
