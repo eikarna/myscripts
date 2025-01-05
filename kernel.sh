@@ -193,8 +193,9 @@ WAKTU=$(date +"%F-%S")
     		tar -xvf gcc64.xz
       		tar -xvf gcc32.xz
 		# git clone https://github.com/mvaisakh/gcc-build.git gcc-build
-		GCC64_DIR=$KERNEL_DIR/gcc64
-		GCC32_DIR=$KERNEL_DIR/gcc32
+  		# Forget to check its directory inside
+		GCC64_DIR=$KERNEL_DIR/gcc-arm64
+		GCC32_DIR=$KERNEL_DIR/gcc-arm
 	fi
 
 	if [ $COMPILER = "clang" ]
