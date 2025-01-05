@@ -210,19 +210,19 @@ install_gcc_requirements()
   		# msger -n "|| Install lolshit tools (glibc 2.38) ||"
     		# install_gcc_requirements
   		msger -n "|| Downloading EVA GCC 14 baremetal ||"
-  		wget https://github.com/mvaisakh/gcc-build/releases/download/25042024/eva-gcc-arm64-25042024.xz -O eva-gcc64.xz
-    		wget https://github.com/mvaisakh/gcc-build/releases/download/25042024/eva-gcc-arm-25042024.xz -O eva-gcc32.xz
+  		wget -q https://github.com/mvaisakh/gcc-build/releases/download/25042024/eva-gcc-arm64-25042024.xz -O gcc64.xz
+    		wget -q https://github.com/mvaisakh/gcc-build/releases/download/25042024/eva-gcc-arm-25042024.xz -O gcc32.xz
       		msger -n "|| Extracting EVA GCC 14 ||"
 		# Check is valid or no
-		file eva-gcc64.xz
-  		file eva-gcc32.xz
+		file gcc64.xz
+  		file gcc32.xz
     		# There is tar file lol
-    		tar -xf eva-gcc64.xz
-      		tar -xf eva-gcc32.xz
+    		tar -xf gcc64.xz
+      		tar -xf gcc32.xz
 		# git clone https://github.com/mvaisakh/gcc-build.git gcc-build
   		# Forget to check its directory inside
-		GCC64_DIR=$KERNEL_DIR/eva-gcc-arm64
-		GCC32_DIR=$KERNEL_DIR/eva-gcc-arm
+		GCC64_DIR=$KERNEL_DIR/gcc-arm64
+		GCC32_DIR=$KERNEL_DIR/gcc-arm
 	fi
 
 	if [ $COMPILER = "clang" ]
