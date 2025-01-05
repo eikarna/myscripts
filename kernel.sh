@@ -18,9 +18,6 @@
  # limitations under the License.
  #
 
-# Optimization Flags, test only
-export CFLAGS="-O3 -pipe -fomit-frame-pointer -march=native"
-
 # Kernel building script
 WORKDIR="$(pwd)"
 KERNEL="$WORKDIR/kernel"
@@ -184,9 +181,12 @@ WAKTU=$(date +"%F-%S")
 	echo " "
 	if [ $COMPILER = "gcc" ]
 	then
-		msger -n "|| Cloning GCC 9.3.0 baremetal ||"
-		git clone --depth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64
-		git clone --depth=1 https://github.com/arter97/arm32-gcc.git gcc32
+		msger -n "|| Downloading EVA GCC 15.0.0 baremetal ||"
+  		wget https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm64-02012025.xz -O gcc64.xz
+    		wget https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm-02012025.xz -O gcc32.xz
+      		msger -n "|| Extracting EVA GCC 15.0.0 ||"
+    		unxz gcc64.xz
+      		unxz gcc32.xz
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
 	fi
@@ -242,10 +242,12 @@ exports()
 	BOT_MSG_URL="https://api.telegram.org/bot$TOKEN/sendMessage"
 	BOT_BUILD_URL="https://api.telegram.org/bot$TOKEN/sendDocument"
 	PROCS=8 # $(nproc --all)
+	# Optimization Flags, test only
+	CFLAGS="-O3 -pipe -fomit-frame-pointer -march=native"
 
 	export KBUILD_BUILD_USER ARCH SUBARCH PATH \
 	       KBUILD_COMPILER_STRING BOT_MSG_URL \
-	       BOT_BUILD_URL PROCS
+	       BOT_BUILD_URL PROCS CFLAGS
 }
 
 ##---------------------------------------------------------##
