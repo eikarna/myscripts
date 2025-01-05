@@ -183,14 +183,15 @@ WAKTU=$(date +"%F-%S")
 	then
 		# msger -n "|| Cloning EVA GCC 15.0.0 baremetal ||"
   		msger -n "|| Downloading EVA GCC 15.0.0 baremetal ||"
-  		wget https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm64-02012025.xz -O gcc64.xz
-    		wget https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm-02012025.xz -O gcc32.xz
+  		wget -q https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm64-02012025.xz -O gcc64.xz
+    		wget -q https://github.com/mvaisakh/gcc-build/releases/download/02012025/eva-gcc-arm-02012025.xz -O gcc32.xz
       		msger -n "|| Extracting EVA GCC 15.0.0 ||"
 		# Check is valid or no
 		file gcc64.xz
   		file gcc32.xz
-    		xz -d gcc64.xz
-      		xz -d gcc32.xz
+    		# There is tar file lol
+    		tar -xvf gcc64.xz
+      		tar -xvf gcc32.xz
 		# git clone https://github.com/mvaisakh/gcc-build.git gcc-build
 		GCC64_DIR=$KERNEL_DIR/gcc64
 		GCC32_DIR=$KERNEL_DIR/gcc32
@@ -199,7 +200,7 @@ WAKTU=$(date +"%F-%S")
 	if [ $COMPILER = "clang" ]
 	then
                 mkdir clang-llvm
-		wget https://github.com/ZyCromerZ/Clang/releases/download/20.0.0git-20241206-release/Clang-20.0.0git-20241206.tar.gz -O "Clang-20.0.0git-20241206.tar.gz"
+		wget -q https://github.com/ZyCromerZ/Clang/releases/download/20.0.0git-20241206-release/Clang-20.0.0git-20241206.tar.gz -O "Clang-20.0.0git-20241206.tar.gz"
                 tar -xf Clang-20.0.0git-20241206.tar.gz -C clang-llvm
 		git clone https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 14 gcc64 --depth=1
                 git clone https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 14 gcc32 --depth=1
